@@ -14,7 +14,7 @@
     }
   ],
   "dependencies": {
-    "TOCropViewController": "https://github.com/meznaric/TOCropViewController",
+    "TOCropViewController": "https://github.com/meznaric/TOCropViewController"
   },
   "nativePackage": true,
   "keywords": [
