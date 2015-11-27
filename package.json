@@ -13,6 +13,9 @@
       "email": "vorj.dux@gmail.com"
     }
   ],
+  "dependencies": {
+    "TOCropViewController": "https://github.com/meznaric/TOCropViewController",
+  },
   "nativePackage": true,
   "keywords": [
     "react-native",
