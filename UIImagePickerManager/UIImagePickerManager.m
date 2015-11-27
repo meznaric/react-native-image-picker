@@ -220,6 +220,8 @@ RCT_EXPORT_METHOD(showImagePicker:(NSDictionary *)options callback:(RCTResponseS
       UIViewController *root = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
       TOCropViewController *cropViewController = [[TOCropViewController alloc] initWithImage:image];
       cropViewController.delegate = self;
+      cropViewController.defaultAspectRatio = TOCropViewControllerAspectRatioSquare;
+      cropViewController.lockedAspectRatio = YES;
       dispatch_async(dispatch_get_main_queue(), ^{
         [root presentViewController:cropViewController animated:YES completion:nil];
       });
