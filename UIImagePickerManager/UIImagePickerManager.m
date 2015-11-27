@@ -238,7 +238,6 @@ RCT_EXPORT_METHOD(showImagePicker:(NSDictionary *)options callback:(RCTResponseS
  */
 - (void)cropViewController:(TOCropViewController *)cropViewController didCropToImage:(UIImage *)image withRect:(CGRect)cropRect angle:(NSInteger)angle
 {
-  
   dispatch_async(dispatch_get_main_queue(), ^{
     [cropViewController dismissViewControllerAnimated:YES completion:nil];
   });
@@ -252,7 +251,10 @@ RCT_EXPORT_METHOD(showImagePicker:(NSDictionary *)options callback:(RCTResponseS
  */
 - (void)cropViewController:(TOCropViewController *)cropViewController didFinishCancelled:(BOOL)cancelled
 {
-  self.callback(@[@"cancel", [NSNull null]]);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [cropViewController dismissViewControllerAnimated:YES completion:nil];
+    });
+    self.callback(@[@"cancel", [NSNull null]]);
 }
 
 - (UIImage*)downscaleImageIfNecessary:(UIImage*)image maxWidth:(float)maxWidth maxHeight:(float)maxHeight
