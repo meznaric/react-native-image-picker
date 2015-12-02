@@ -105,11 +105,19 @@ RCT_EXPORT_METHOD(showImagePicker:(NSDictionary *)options callback:(RCTResponseS
     
     if ([action.title isEqualToString:[self.options valueForKey:@"takePhotoButtonTitle"]]) { // Take photo
         // Will crash if we try to use camera on the simulator
+      UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+      if(UIInterfaceOrientationIsLandscape(interfaceOrientation) &&
+         UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad  ) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Rotate to Take Photos" message:@"To take a photo, please rotate phone to portrait mode." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        [alert show];
+        return;
+      }
 #if TARGET_IPHONE_SIMULATOR
         NSLog(@"Camera not available on simulator");
         return;
 #else
         self.picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        self.picker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
 #endif
     }
     else if ([action.title isEqualToString:[self.options valueForKey:@"chooseFromLibraryButtonTitle"]]) { // Choose from library
